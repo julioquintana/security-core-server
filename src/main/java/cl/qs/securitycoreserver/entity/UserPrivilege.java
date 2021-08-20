@@ -1,14 +1,10 @@
 package cl.qs.securitycoreserver.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -16,7 +12,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_privileges")
-public class UserPrivileges {
+public class UserPrivilege {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "user_client_access_id")
     private Long userClientAccessId;
 
@@ -28,10 +30,6 @@ public class UserPrivileges {
 
     @Column(name = "module_id")
     private String moduleId;
-
-    @Id
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "default_value")
     private String defaultValue;
@@ -47,4 +45,20 @@ public class UserPrivileges {
 
     @Column(name = "updated_at")
     private Timestamp updatedAt;
+
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "user_client_access_id", referencedColumnName = "id", insertable = false, updatable = false),
+            @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
+    })
+    private UserClientAccess userClientAccess;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "client_id", referencedColumnName = "client_id", insertable = false, updatable = false),
+            @JoinColumn(name = "module_id", referencedColumnName = "module_id", insertable = false, updatable = false),
+            @JoinColumn(name = "privileges_id", referencedColumnName = "id", insertable = false, updatable = false)
+    })
+    private Privilege privileges;
 }

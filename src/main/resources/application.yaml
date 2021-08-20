@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        default_schema: "public"
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  datasource:
+    password: "addc69b89891f9013bb4c7fa01e18b48e1c16e35ced41acc6c06d47a85c854eb"
+    username: "dtwqodyfmyusun"
+    url: "jdbc:postgresql://ec2-54-159-35-35.compute-1.amazonaws.com:5432/d3cilndjmhftrl"
+

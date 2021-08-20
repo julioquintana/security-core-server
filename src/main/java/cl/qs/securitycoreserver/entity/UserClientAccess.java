@@ -1,85 +1,57 @@
+package cl.qs.securitycoreserver.entity;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "user_client_access")
 public class UserClientAccess {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "user_id")
+    private String userId;
+
     @Column(name = "client_id")
     private Long clientId;
 
     @Column(name = "created_for")
     private String createdFor;
 
-    @Id
-    @Column(name = "user_id")
-    private String userId;
-
-    @Id
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "description")
     private String description;
 
-    @Column(name = "create_at")
-    private null createAt;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
-    @Column(name = "update_at")
-    private null updateAt;
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
-    public Long getClientId() {
-        return this.clientId;
-    }
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private User user;
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Client client;
 
-    public String getCreatedFor() {
-        return this.createdFor;
-    }
-
-    public void setCreatedFor(String createdFor) {
-        this.createdFor = createdFor;
-    }
-
-    public String getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public null getCreateAt() {
-        return this.createAt;
-    }
-
-    public void setCreateAt(null createAt) {
-        this.createAt = createAt;
-    }
-
-    public null getUpdateAt() {
-        return this.updateAt;
-    }
-
-    public void setUpdateAt(null updateAt) {
-        this.updateAt = updateAt;
-    }
+    @Valid
+    @JsonManagedReference
+    @OneToMany(mappedBy = "userClientAccess", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<UserPrivilege> userPrivileges;
 }
