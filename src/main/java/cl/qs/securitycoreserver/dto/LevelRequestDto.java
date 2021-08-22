@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 public class LevelRequestDto {
+    private Long id;
     @NotNull @Size(min = 1, max = 256)
     private String name;
     @NotNull @Size(min = 1, max = 1024)

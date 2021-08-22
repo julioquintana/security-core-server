@@ -1,9 +1,6 @@
 package cl.qs.securitycoreserver.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,13 +9,14 @@ import java.sql.Timestamp;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "levels")
 public class Level {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -28,11 +26,11 @@ public class Level {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "created_for")
+    @Column(name = "created_for", updatable = false)
     private String createdFor;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
     @UpdateTimestamp

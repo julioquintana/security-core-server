@@ -9,4 +9,5 @@ import java.util.List;
 public interface LevelServiceInterface {
     List<Level> findAll() throws SecurityCoreServerException;
     Level save(LevelRequestDto levelRequestDto);
+    Level update(LevelRequestDto levelRequestDto) throws SecurityCoreServerException;
 }

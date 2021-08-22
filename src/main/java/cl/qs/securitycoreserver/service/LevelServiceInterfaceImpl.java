@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LevelServiceInterfaceImpl implements LevelServiceInterface {
@@ -36,5 +37,17 @@ public class LevelServiceInterfaceImpl implements LevelServiceInterface {
         Level level = Mapper.buildLevel(levelRequestDto);
 
         return levelRepositoryInterface.save(level);
+    }
+    @Override
+    public Level update(LevelRequestDto levelRequestDto) throws SecurityCoreServerException {
+        Optional<Level> levelOptional = levelRepositoryInterface.findById(levelRequestDto.getId());
+
+        if(levelOptional.isPresent()) {
+            Level level = Mapper.buildLevelUpdate(levelRequestDto, levelOptional.get());
+
+            return levelRepositoryInterface.save(level);
+        }else{
+            throw new SecurityCoreServerException("9991","ERROR" ,"No encontre Level cone este ID en la DB", HttpStatus.NOT_FOUND);
+        }
     }
 }
