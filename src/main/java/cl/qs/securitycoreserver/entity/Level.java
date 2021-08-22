@@ -1,19 +1,18 @@
 package cl.qs.securitycoreserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "levels")
@@ -32,21 +31,13 @@ public class Level {
     @Column(name = "created_for")
     private String createdFor;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private Timestamp createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @Valid
-    @JsonManagedReference
-    @OneToMany(mappedBy = "level", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<User> users;
 
-    @Valid
-    @JsonManagedReference
-    @OneToMany(mappedBy = "level", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Module> modules;
 }
