@@ -3,6 +3,8 @@ package cl.qs.securitycoreserver.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,11 +21,8 @@ public class UserPrivilege {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_client_access_id")
-    private Long userClientAccessId;
-
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "user_access_id")
+    private Long userAccessId;
 
     @Column(name = "privileges_id")
     private Long privilegesId;
@@ -34,31 +33,39 @@ public class UserPrivilege {
     @Column(name = "default_value")
     private String defaultValue;
 
+    @Column(name = "application_id")
+    private Long applicationId;
+
     @Column(name = "created_for")
     private String createdFor;
 
-    @Column(name = "client_id")
-    private Long clientId;
-
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "user_client_access_id", referencedColumnName = "id", insertable = false, updatable = false),
-            @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
+            @JoinColumn(name = "user_access_id", referencedColumnName = "id", insertable = false, updatable = false),
+            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
     })
-    private UserClientAccess userClientAccess;
+    private UserApplicationAccess userApplicationAccess;
 
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "client_id", referencedColumnName = "client_id", insertable = false, updatable = false),
+            @JoinColumn(name = "user_access_id", referencedColumnName = "id", insertable = false, updatable = false),
+            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
+    })
+    private ClientApplicationAccess clientApplicationAccess;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "application_id", referencedColumnName = "application_id", insertable = false, updatable = false),
             @JoinColumn(name = "module_id", referencedColumnName = "module_id", insertable = false, updatable = false),
-            @JoinColumn(name = "privileges_id", referencedColumnName = "id", insertable = false, updatable = false)
-    })
+            @JoinColumn(name = "privileges_id", referencedColumnName = "id", insertable = false, updatable = false),
+            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)})
     private Privilege privileges;
 }

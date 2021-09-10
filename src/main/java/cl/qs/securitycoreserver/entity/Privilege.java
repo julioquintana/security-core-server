@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -25,8 +27,8 @@ public class Privilege {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "client_id")
-    private Long clientId;
+    @Column(name = "application_id")
+    private Long applicationId;
 
     @Column(name = "module_id")
     private String moduleId;
@@ -40,9 +42,11 @@ public class Privilege {
     @Column(name = "created_for")
     private String createdFor;
 
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
@@ -54,8 +58,9 @@ public class Privilege {
 
     @ManyToOne(optional = false)
     @JoinColumns({
-            @JoinColumn(name = "client_id", referencedColumnName = "client_id", insertable = false, updatable = false),
-            @JoinColumn(name = "module_id", referencedColumnName = "id", insertable = false, updatable = false)
+            @JoinColumn(name = "application_id", referencedColumnName = "application_id", insertable = false, updatable = false),
+            @JoinColumn(name = "module_id", referencedColumnName = "id", insertable = false, updatable = false),
+            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
     })
     private Module modules;
 

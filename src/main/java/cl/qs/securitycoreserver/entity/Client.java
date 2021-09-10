@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -19,31 +21,17 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "clients")
 public class Client {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "dni")
-    private String dni;
-
     @Column(name = "name")
     private String name;
 
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "contact")
-    private String contact;
-
-    @Column(name = "dni_contact")
-    private String dniContact;
-
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "currency_symbol")
-    private String currencySymbol;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "status")
     private boolean status;
@@ -51,21 +39,17 @@ public class Client {
     @Column(name = "created_for")
     private String createdFor;
 
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
-
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "id", referencedColumnName = "client_id", insertable = false, updatable = false)
-    private UserClientAccess userClientAccess;
 
     @Valid
     @JsonManagedReference
     @OneToMany(mappedBy = "client", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Module> modules;
-
-
+    private List<ClientApplicationAccess> clientApplicationAccesses;
 }

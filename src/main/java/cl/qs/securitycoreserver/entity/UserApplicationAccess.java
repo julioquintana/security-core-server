@@ -1,6 +1,5 @@
 package cl.qs.securitycoreserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,28 +18,24 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "modules")
-public class Module {
-
+@Table(name = "user_application_access")
+public class UserApplicationAccess {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
+
+    @Column(name = "user_id")
+    private String userId;
 
     @Column(name = "application_id")
     private Long applicationId;
 
-    @Column(name = "level_id")
-    private Long levelId;
-
-    @Column(name = "name")
-    private String name;
+    @Column(name = "created_for")
+    private String createdFor;
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "created_for")
-    private String createdFor;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
@@ -50,22 +45,17 @@ public class Module {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @JsonBackReference
     @ManyToOne(optional = false)
-    @JoinColumn(name = "level_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private Level level;
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private User user;
 
-    @JsonBackReference
     @ManyToOne(optional = false)
-    @JoinColumns({
-            @JoinColumn(name = "application_id", referencedColumnName = "id", insertable = false, updatable = false),
-            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)})
+    @JoinColumn(name = "application_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Application application;
 
     @Valid
     @JsonManagedReference
-    @OneToMany(mappedBy = "modules", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userApplicationAccess", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Privilege> privileges;
-
+    private List<UserPrivilege> userPrivileges;
 }

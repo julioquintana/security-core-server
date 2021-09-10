@@ -5,9 +5,9 @@ spring:
     properties:
       hibernate:
         default_schema: "public"
-        format_sql: true
+        #format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
+    #show-sql: true
   datasource:
     password: "addc69b89891f9013bb4c7fa01e18b48e1c16e35ced41acc6c06d47a85c854eb"
     username: "dtwqodyfmyusun"
