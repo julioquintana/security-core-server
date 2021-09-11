@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.4'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 group = 'cl.qs'
@@ -9,38 +9,40 @@ version = '1'
 sourceCompatibility = '15'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
-	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
 
-	// Postgresql DB
-	implementation 'org.postgresql:postgresql:42.2.23.jre7'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+    // Postgresql DB
+    implementation 'org.postgresql:postgresql:42.2.23.jre7'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
 
-	//DEV_WEB_TOOLS
-	compileOnly 'org.projectlombok:lombok:1.18.20'
-	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    //DEV_WEB_TOOLS
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-	//DOCUMENTATION
-	implementation "io.springfox:springfox-boot-starter:3.0.0"
-	implementation "io.springfox:springfox-swagger-ui:3.0.0"
-	//TEST
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
-	//testImplementation 'org.springframework.security:spring-security-test'
+    //DOCUMENTATION
+    implementation "io.springfox:springfox-boot-starter:3.0.0"
+    implementation "io.springfox:springfox-swagger-ui:3.0.0"
+    //TEST
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+    //testImplementation 'org.springframework.security:spring-security-test'
 
+    //SECURITY
+    implementation 'org.springframework.security:spring-security-crypto:3.1.0.RELEASE'
 
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

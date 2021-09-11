@@ -30,7 +30,7 @@ public class LevelServiceInterfaceImpl implements LevelServiceInterface {
     public List<LevelResponseDto> findAll() throws SecurityCoreServerException {
         List<Level> levels = levelRepositoryInterface.findAll();
         if (!CollectionUtils.isEmpty(levels)) {
-            return Mapper.buildRevelResponseList(levels);
+            return Mapper.buildLevelResponseList(levels);
         }
         throw new SecurityCoreServerException("9999", Constants.ERROR, Constants.LEVEL_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
