@@ -1,8 +1,11 @@
 package cl.qs.securitycoreserver.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -16,5 +19,9 @@ public class UserResponseDto {
     private String email;
     private String type;
     private boolean status;
+    @JsonProperty("created_at")
+    private Timestamp createdAt;
+    @JsonProperty("updated_at")
+    private Timestamp updatedAt;
     private String user;
 }
