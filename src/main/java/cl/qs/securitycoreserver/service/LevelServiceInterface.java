@@ -8,8 +8,11 @@ import java.util.List;
 
 public interface LevelServiceInterface {
     List<LevelResponseDto> findAll() throws SecurityCoreServerException;
+
     LevelResponseDto save(LevelRequestDto levelRequestDto);
+
     LevelResponseDto update(LevelRequestDto levelRequestDto) throws SecurityCoreServerException;
+
     LevelResponseDto findById(Long id) throws SecurityCoreServerException;
 
     LevelResponseDto deleteById(Long id) throws SecurityCoreServerException;

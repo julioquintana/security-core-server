@@ -23,5 +23,5 @@ public class UserResponseDto {
     private Timestamp createdAt;
     @JsonProperty("updated_at")
     private Timestamp updatedAt;
-    private String user;
+    private Long user;
 }

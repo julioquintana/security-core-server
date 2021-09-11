@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
@@ -14,7 +16,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_privileges")
-public class UserPrivilege {
+public class UserPrivilege implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1;
 
     @Id
     @Column(name = "id")
@@ -48,24 +52,19 @@ public class UserPrivilege {
     private Timestamp updatedAt;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "user_access_id", referencedColumnName = "id", insertable = false, updatable = false),
-            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
-    })
+    @JoinColumn(name = "user_access_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
     private UserApplicationAccess userApplicationAccess;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "user_access_id", referencedColumnName = "id", insertable = false, updatable = false),
-            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
-    })
+    @JoinColumn(name = "user_access_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
     private ClientApplicationAccess clientApplicationAccess;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "application_id", referencedColumnName = "application_id", insertable = false, updatable = false),
-            @JoinColumn(name = "module_id", referencedColumnName = "module_id", insertable = false, updatable = false),
-            @JoinColumn(name = "privileges_id", referencedColumnName = "id", insertable = false, updatable = false),
-            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)})
+    @JoinColumn(name = "application_id", referencedColumnName = "application_id", insertable = false, updatable = false)
+    @JoinColumn(name = "module_id", referencedColumnName = "module_id", insertable = false, updatable = false)
+    @JoinColumn(name = "privileges_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
     private Privilege privileges;
 }

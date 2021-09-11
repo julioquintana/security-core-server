@@ -4,6 +4,10 @@ package cl.qs.securitycoreserver.util;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class PasswordUtil {
+    private PasswordUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     // Define the BCrypt workload to use when generating pass hashes. 10-31 is a valid value.
     private static int workload = 15;
 
@@ -15,15 +19,15 @@ public class PasswordUtil {
      * A workload of 12 is a very reasonable safe default as of 2013.
      * This automatically handles secure 128-bit salt generation and storage within the hash.
      *
-     * @param password_plaintext The account's plaintext pass as provided during account creation,
-     *                           or when changing an account's pass.
+     * @param passwordPlainText The account's plaintext pass as provided during account creation,
+     *                          or when changing an account's pass.
      * @return String - a string of length 60 that is the bcrypt hashed pass in crypt(3) format.
      */
-    public static String getHashPassword(String password_plaintext) {
+    public static String getHashPassword(String passwordPlainText) {
         String salt = BCrypt.gensalt(workload);
-        String hashed_password = BCrypt.hashpw(password_plaintext, salt);
+        String hashedPassword = BCrypt.hashpw(passwordPlainText, salt);
 
-        return (hashed_password);
+        return (hashedPassword);
     }
 
     /**
@@ -31,19 +35,19 @@ public class PasswordUtil {
      * request) with that of a stored hash from a database. The pass hash from the database
      * must be passed as the second variable.
      *
-     * @param password_plaintext The account's plaintext pass, as provided during a login request
-     * @param stored_hash        The account's stored pass hash, retrieved from the authorization database
+     * @param passwordPlaintext The account's plaintext pass, as provided during a login request
+     * @param storedHash        The account's stored pass hash, retrieved from the authorization database
      * @return boolean - true if the pass matches the pass of the stored hash, false otherwise
      */
-    public static boolean checkPassword(String password_plaintext, String stored_hash) {
-        boolean password_verified = false;
+    public static boolean checkPassword(String passwordPlaintext, String storedHash) {
+        boolean passwordVerified = false;
 
-        if (null == stored_hash || !stored_hash.startsWith("$2a$"))
+        if (null == storedHash || !storedHash.startsWith("$2a$"))
             throw new IllegalArgumentException("Invalid hash provided for comparison");
 
-        password_verified = BCrypt.checkpw(password_plaintext, stored_hash);
+        passwordVerified = BCrypt.checkpw(passwordPlaintext, storedHash);
 
-        return (password_verified);
+        return (passwordVerified);
     }
 
 }

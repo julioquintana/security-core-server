@@ -12,28 +12,26 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class UserRequestDto {
     private Long id;
-
     @NotNull
-    @Size(min = 1, max = 256)
     private Long levelId;
     @NotNull
-    @Size(min = 1, max = 256)
+    @Size(min = 1, max = 16)
     private String dni;
     @NotNull
-    @Size(min = 1, max = 256)
+    @Size(min = 1, max = 128)
     private String prefix;
     @NotNull
     @Size(min = 1, max = 256)
     private String name;
     @NotNull
-    @Size(min = 1, max = 256)
+    @Size(min = 1, max = 128)
     private String email;
     @NotNull
-    @Size(min = 1, max = 256)
+    @Size(min = 1, max = 512)
     private String password;
     @Size(min = 1, max = 256)
     private String type;
     @NotNull
     @Size(min = 1, max = 128)
-    private String user;
+    private Long user;
 }

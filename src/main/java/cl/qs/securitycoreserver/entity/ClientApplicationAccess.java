@@ -12,6 +12,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -20,7 +22,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "client_application_access")
-public class ClientApplicationAccess {
+public class ClientApplicationAccess implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1;
+
 
     @Id
     @Column(name = "id")
@@ -55,9 +60,8 @@ public class ClientApplicationAccess {
 
 
     @ManyToOne(optional = false)
-    @JoinColumns({
-            @JoinColumn(name = "client_id", referencedColumnName = "id", insertable = false, updatable = false),
-            @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)})
+    @JoinColumn(name = "client_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "created_for", referencedColumnName = "created_for", insertable = false, updatable = false)
     private Client client;
 
     @Valid
