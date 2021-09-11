@@ -50,6 +50,8 @@ public class Mapper {
                 .type(user.getType())
                 .status(user.isStatus())
                 .user(user.getCreatedFor())
+                .updatedAt(user.getUpdatedAt())
+                .createdAt(user.getCreatedAt())
                 .build();
     }
 
