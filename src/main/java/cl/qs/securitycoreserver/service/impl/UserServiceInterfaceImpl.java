@@ -7,8 +7,8 @@ import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.UserRepositoryInterface;
 import cl.qs.securitycoreserver.service.UserServiceInterface;
 import cl.qs.securitycoreserver.util.Constants;
-import cl.qs.securitycoreserver.util.Mapper;
 import cl.qs.securitycoreserver.util.PasswordUtil;
+import cl.qs.securitycoreserver.util.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +32,7 @@ public class UserServiceInterfaceImpl implements UserServiceInterface {
     public Page<UserResponseDto> findAll(Pageable pageable) throws SecurityCoreServerException {
         Page<User> users = userRepository.findAll(pageable);
         if (!CollectionUtils.isEmpty(users.getContent())) {
-            return Mapper.buildUserResponseList(users);
+            return UserMapper.buildUserResponseList(users);
         }
         throw new SecurityCoreServerException("9999", Constants.ERROR, Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
@@ -42,7 +42,7 @@ public class UserServiceInterfaceImpl implements UserServiceInterface {
         Optional<User> optionalUser = userRepository.findByDni(userRequestDto.getDni());
         if (optionalUser.isEmpty()) {
             userRequestDto.setPassword(PasswordUtil.getHashPassword(userRequestDto.getPassword()));
-            return Mapper.buildUserResponse(userRepository.save(Mapper.buildUser(userRequestDto)));
+            return UserMapper.buildUserResponse(userRepository.save(UserMapper.buildUser(userRequestDto)));
         } else {
             throw new SecurityCoreServerException("9991",
                     Constants.ERROR, Constants.USER_FOUND + " [" + userRequestDto.getDni() + "]",
@@ -55,9 +55,9 @@ public class UserServiceInterfaceImpl implements UserServiceInterface {
         Optional<User> optionalUser = userRepository.findById(userRequestDto.getId());
 
         if (optionalUser.isPresent()) {
-            User level = Mapper.buildUserUpdate(userRequestDto, optionalUser.get());
+            User level = UserMapper.buildUserUpdate(userRequestDto, optionalUser.get());
 
-            return Mapper.buildUserResponse(userRepository.save(level));
+            return UserMapper.buildUserResponse(userRepository.save(level));
         } else {
             throw new SecurityCoreServerException("9991", Constants.ERROR, Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
@@ -68,7 +68,7 @@ public class UserServiceInterfaceImpl implements UserServiceInterface {
         Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isPresent()) {
-            return Mapper.buildUserResponse(userOptional.get());
+            return UserMapper.buildUserResponse(userOptional.get());
         } else {
             throw new SecurityCoreServerException("9992", Constants.ERROR, Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
@@ -80,7 +80,7 @@ public class UserServiceInterfaceImpl implements UserServiceInterface {
 
         if (userOptional.isPresent()) {
             userRepository.deleteById(id);
-            return Mapper.buildUserResponse(userOptional.get());
+            return UserMapper.buildUserResponse(userOptional.get());
         } else {
             throw new SecurityCoreServerException("9993", Constants.ERROR, Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
         }

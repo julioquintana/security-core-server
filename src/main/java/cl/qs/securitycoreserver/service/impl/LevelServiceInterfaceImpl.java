@@ -7,7 +7,7 @@ import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.LevelRepositoryInterface;
 import cl.qs.securitycoreserver.service.LevelServiceInterface;
 import cl.qs.securitycoreserver.util.Constants;
-import cl.qs.securitycoreserver.util.Mapper;
+import cl.qs.securitycoreserver.util.LevelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,14 +30,14 @@ public class LevelServiceInterfaceImpl implements LevelServiceInterface {
     public List<LevelResponseDto> findAll() throws SecurityCoreServerException {
         List<Level> levels = levelRepositoryInterface.findAll();
         if (!CollectionUtils.isEmpty(levels)) {
-            return Mapper.buildLevelResponseList(levels);
+            return LevelMapper.buildLevelResponseList(levels);
         }
         throw new SecurityCoreServerException("9999", Constants.ERROR, Constants.LEVEL_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
     @Override
     public LevelResponseDto save(LevelRequestDto levelRequestDto) {
-        return Mapper.buildLevelResponse(levelRepositoryInterface.save(Mapper.buildLevel(levelRequestDto)));
+        return LevelMapper.buildLevelResponse(levelRepositoryInterface.save(LevelMapper.buildLevel(levelRequestDto)));
     }
 
     @Override
@@ -45,9 +45,9 @@ public class LevelServiceInterfaceImpl implements LevelServiceInterface {
         Optional<Level> levelOptional = levelRepositoryInterface.findById(levelRequestDto.getId());
 
         if (levelOptional.isPresent()) {
-            Level level = Mapper.buildLevelUpdate(levelRequestDto, levelOptional.get());
+            Level level = LevelMapper.buildLevelUpdate(levelRequestDto, levelOptional.get());
 
-            return Mapper.buildLevelResponse(levelRepositoryInterface.save(level));
+            return LevelMapper.buildLevelResponse(levelRepositoryInterface.save(level));
         } else {
             throw new SecurityCoreServerException("9991", Constants.ERROR, Constants.LEVEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
@@ -58,7 +58,7 @@ public class LevelServiceInterfaceImpl implements LevelServiceInterface {
         Optional<Level> levelOptional = levelRepositoryInterface.findById(id);
 
         if (levelOptional.isPresent()) {
-            return Mapper.buildLevelResponse(levelOptional.get());
+            return LevelMapper.buildLevelResponse(levelOptional.get());
         } else {
             throw new SecurityCoreServerException("9992", Constants.ERROR, Constants.LEVEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
@@ -70,7 +70,7 @@ public class LevelServiceInterfaceImpl implements LevelServiceInterface {
 
         if (levelOptional.isPresent()) {
             levelRepositoryInterface.deleteById(id);
-            return Mapper.buildLevelResponse(levelOptional.get());
+            return LevelMapper.buildLevelResponse(levelOptional.get());
         } else {
             throw new SecurityCoreServerException("9993", Constants.ERROR, Constants.LEVEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }

@@ -6,8 +6,8 @@ import cl.qs.securitycoreserver.entity.Application;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.ApplicationRepositoryInterface;
 import cl.qs.securitycoreserver.service.ApplicationServiceInterface;
+import cl.qs.securitycoreserver.util.ApplicationMapper;
 import cl.qs.securitycoreserver.util.Constants;
-import cl.qs.securitycoreserver.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class ApplicationServiceInterfaceImpl implements ApplicationServiceInterf
     public List<ApplicationResponseDto> findAll() throws SecurityCoreServerException {
         List<Application> applicationEntities = applicationRepository.findAll();
         if (!CollectionUtils.isEmpty(applicationEntities)) {
-            return Mapper.buildApplicationResponseList(applicationEntities);
+            return ApplicationMapper.buildApplicationResponseList(applicationEntities);
         }
         throw new SecurityCoreServerException("9999", Constants.ERROR, Constants.APPLICATION_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
@@ -39,7 +39,7 @@ public class ApplicationServiceInterfaceImpl implements ApplicationServiceInterf
     public ApplicationResponseDto save(ApplicationRequestDto applicationRequestDto) throws SecurityCoreServerException {
         Optional<Application> applicationOptional = applicationRepository.findByName(applicationRequestDto.getName());
         if (applicationOptional.isEmpty()) {
-            return Mapper.buildApplicationResponse(applicationRepository.save(Mapper.buildApplication(applicationRequestDto)));
+            return ApplicationMapper.buildApplicationResponse(applicationRepository.save(ApplicationMapper.buildApplication(applicationRequestDto)));
         } else {
             throw new SecurityCoreServerException("9991",
                     Constants.ERROR, Constants.APPLICATION_FOUND + " [" + applicationRequestDto.getName() + "]",
@@ -52,9 +52,9 @@ public class ApplicationServiceInterfaceImpl implements ApplicationServiceInterf
         Optional<Application> applicationOptional = applicationRepository.findById(applicationRequestDto.getId());
 
         if (applicationOptional.isPresent()) {
-            Application application = Mapper.buildApplicationUpdate(applicationRequestDto, applicationOptional.get());
+            Application application = ApplicationMapper.buildApplicationUpdate(applicationRequestDto, applicationOptional.get());
 
-            return Mapper.buildApplicationResponse(applicationRepository.save(application));
+            return ApplicationMapper.buildApplicationResponse(applicationRepository.save(application));
         } else {
             throw new SecurityCoreServerException("9991", Constants.ERROR, Constants.APPLICATION_NOT_FOUND_BY_ID, HttpStatus.NOT_FOUND);
         }
@@ -65,7 +65,7 @@ public class ApplicationServiceInterfaceImpl implements ApplicationServiceInterf
         Optional<Application> levelOptional = applicationRepository.findById(id);
 
         if (levelOptional.isPresent()) {
-            return Mapper.buildApplicationResponse(levelOptional.get());
+            return ApplicationMapper.buildApplicationResponse(levelOptional.get());
         } else {
             throw new SecurityCoreServerException("9992", Constants.ERROR, Constants.APPLICATION_NOT_FOUND_BY_ID, HttpStatus.NOT_FOUND);
         }
@@ -77,7 +77,7 @@ public class ApplicationServiceInterfaceImpl implements ApplicationServiceInterf
 
         if (levelOptional.isPresent()) {
             applicationRepository.deleteById(id);
-            return Mapper.buildApplicationResponse(levelOptional.get());
+            return ApplicationMapper.buildApplicationResponse(levelOptional.get());
         } else {
             throw new SecurityCoreServerException("9993", Constants.ERROR, Constants.APPLICATION_NOT_FOUND_BY_ID, HttpStatus.NOT_FOUND);
         }
