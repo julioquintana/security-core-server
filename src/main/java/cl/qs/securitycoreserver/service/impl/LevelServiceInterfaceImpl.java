@@ -1,7 +1,7 @@
 package cl.qs.securitycoreserver.service.impl;
 
-import cl.qs.securitycoreserver.dto.LevelRequestDto;
-import cl.qs.securitycoreserver.dto.LevelResponseDto;
+import cl.qs.securitycoreserver.dto.level.LevelRequestDto;
+import cl.qs.securitycoreserver.dto.level.LevelResponseDto;
 import cl.qs.securitycoreserver.entity.Level;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.LevelRepositoryInterface;

@@ -1,4 +1,4 @@
-package cl.qs.securitycoreserver.util;
+package cl.qs.securitycoreserver.security;
 
 
 import org.springframework.security.crypto.bcrypt.BCrypt;

@@ -1,13 +1,13 @@
 package cl.qs.securitycoreserver.service.impl;
 
-import cl.qs.securitycoreserver.dto.UserRequestDto;
-import cl.qs.securitycoreserver.dto.UserResponseDto;
+import cl.qs.securitycoreserver.dto.user.UserRequestDto;
+import cl.qs.securitycoreserver.dto.user.UserResponseDto;
 import cl.qs.securitycoreserver.entity.User;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.UserRepositoryInterface;
+import cl.qs.securitycoreserver.security.PasswordUtil;
 import cl.qs.securitycoreserver.service.UserServiceInterface;
 import cl.qs.securitycoreserver.util.Constants;
-import cl.qs.securitycoreserver.util.PasswordUtil;
 import cl.qs.securitycoreserver.util.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

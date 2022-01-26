@@ -68,5 +68,5 @@ public class ClientApplicationAccess implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "clientApplicationAccess", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<UserPrivilege> userPrivileges;
+    private List<UserAuthorization> userAuthorizations;
 }

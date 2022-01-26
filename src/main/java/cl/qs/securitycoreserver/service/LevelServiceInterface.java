@@ -1,7 +1,7 @@
 package cl.qs.securitycoreserver.service;
 
-import cl.qs.securitycoreserver.dto.LevelRequestDto;
-import cl.qs.securitycoreserver.dto.LevelResponseDto;
+import cl.qs.securitycoreserver.dto.level.LevelRequestDto;
+import cl.qs.securitycoreserver.dto.level.LevelResponseDto;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package cl.qs.securitycoreserver.controller;
 
-import cl.qs.securitycoreserver.dto.UserRequestDto;
-import cl.qs.securitycoreserver.dto.UserResponseDto;
+import cl.qs.securitycoreserver.dto.user.UserRequestDto;
+import cl.qs.securitycoreserver.dto.user.UserResponseDto;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.service.UserServiceInterface;
 import io.swagger.v3.oas.annotations.tags.Tag;

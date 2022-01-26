@@ -1,4 +1,4 @@
-package cl.qs.securitycoreserver.dto;
+package cl.qs.securitycoreserver.dto.application;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

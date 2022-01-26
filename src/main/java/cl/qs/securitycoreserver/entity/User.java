@@ -53,7 +53,7 @@ public class User implements Serializable {
     private String type;
 
     @Column(name = "status")
-    private boolean status;
+    private String status;
 
     @Column(name = "created_for")
     private Long createdFor;

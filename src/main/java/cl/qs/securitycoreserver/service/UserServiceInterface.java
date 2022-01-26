@@ -1,7 +1,7 @@
 package cl.qs.securitycoreserver.service;
 
-import cl.qs.securitycoreserver.dto.UserRequestDto;
-import cl.qs.securitycoreserver.dto.UserResponseDto;
+import cl.qs.securitycoreserver.dto.user.UserRequestDto;
+import cl.qs.securitycoreserver.dto.user.UserResponseDto;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

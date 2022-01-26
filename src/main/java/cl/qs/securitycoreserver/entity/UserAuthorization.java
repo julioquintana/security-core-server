@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_privileges")
-public class UserPrivilege implements Serializable {
+public class UserAuthorization implements Serializable {
     @Serial
     private static final long serialVersionUID = 1;
 

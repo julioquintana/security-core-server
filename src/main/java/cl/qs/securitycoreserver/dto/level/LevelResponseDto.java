@@ -1,4 +1,4 @@
-package cl.qs.securitycoreserver.dto;
+package cl.qs.securitycoreserver.dto.level;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -10,18 +10,13 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Builder
-public class UserResponseDto {
+public class LevelResponseDto {
     private Long id;
-    private Long levelId;
-    private String dni;
-    private String prefix;
     private String name;
-    private String email;
-    private String type;
-    private boolean status;
+    private String description;
     @JsonProperty("created_at")
     private Timestamp createdAt;
     @JsonProperty("updated_at")
     private Timestamp updatedAt;
-    private Long user;
+    private String user;
 }

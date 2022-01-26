@@ -1,7 +1,7 @@
 package cl.qs.securitycoreserver.service.impl;
 
-import cl.qs.securitycoreserver.dto.ApplicationRequestDto;
-import cl.qs.securitycoreserver.dto.ApplicationResponseDto;
+import cl.qs.securitycoreserver.dto.application.ApplicationRequestDto;
+import cl.qs.securitycoreserver.dto.application.ApplicationResponseDto;
 import cl.qs.securitycoreserver.entity.Application;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.ApplicationRepositoryInterface;

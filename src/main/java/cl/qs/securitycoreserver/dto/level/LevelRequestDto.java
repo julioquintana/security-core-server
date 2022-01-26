@@ -1,4 +1,4 @@
-package cl.qs.securitycoreserver.dto;
+package cl.qs.securitycoreserver.dto.level;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +12,13 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class LevelRequestDto {
     private Long id;
-    @NotNull @Size(min = 1, max = 256)
+    @NotNull
+    @Size(min = 1, max = 256)
     private String name;
-    @NotNull @Size(min = 1, max = 1024)
+    @NotNull
+    @Size(min = 1, max = 1024)
     private String description;
-    @NotNull @Size(min = 1, max = 128)
+    @NotNull
+    @Size(min = 1, max = 128)
     private String user;
 }

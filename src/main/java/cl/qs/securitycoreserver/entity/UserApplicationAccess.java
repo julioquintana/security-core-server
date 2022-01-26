@@ -30,13 +30,13 @@ public class UserApplicationAccess implements Serializable {
     private Long id;
 
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     @Column(name = "application_id")
     private Long applicationId;
 
     @Column(name = "created_for")
-    private String createdFor;
+    private Long createdFor;
 
     @Column(name = "description")
     private String description;
@@ -61,5 +61,5 @@ public class UserApplicationAccess implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "userApplicationAccess", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<UserPrivilege> userPrivileges;
+    private List<UserAuthorization> userAuthorizations;
 }

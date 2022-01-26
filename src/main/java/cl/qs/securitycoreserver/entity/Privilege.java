@@ -57,7 +57,7 @@ public class Privilege implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "privileges", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<UserPrivilege> userPrivileges;
+    private List<UserAuthorization> userAuthorizations;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "application_id", referencedColumnName = "application_id", insertable = false, updatable = false)

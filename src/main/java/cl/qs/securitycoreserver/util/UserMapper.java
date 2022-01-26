@@ -1,7 +1,7 @@
 package cl.qs.securitycoreserver.util;
 
-import cl.qs.securitycoreserver.dto.UserRequestDto;
-import cl.qs.securitycoreserver.dto.UserResponseDto;
+import cl.qs.securitycoreserver.dto.user.UserRequestDto;
+import cl.qs.securitycoreserver.dto.user.UserResponseDto;
 import cl.qs.securitycoreserver.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -25,7 +25,7 @@ public class UserMapper {
                 .email(userRequestDto.getEmail())
                 .password(userRequestDto.getPassword())
                 .type(userRequestDto.getType())
-                .status(true)
+                .status("active")
                 .createdFor(userRequestDto.getUser())
                 .build();
     }
@@ -39,7 +39,7 @@ public class UserMapper {
                 .name(user.getName())
                 .email(user.getEmail())
                 .type(user.getType())
-                .status(user.isStatus())
+                .status(user.getStatus())
                 .user(user.getCreatedFor())
                 .updatedAt(user.getUpdatedAt())
                 .createdAt(user.getCreatedAt())

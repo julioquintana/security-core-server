@@ -1,4 +1,4 @@
-package cl.qs.securitycoreserver.dto;
+package cl.qs.securitycoreserver.dto.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
