@@ -36,7 +36,7 @@ public class AuthController {
   }
 
   @PostMapping("/change_password")
-  public HttpEntity<ChangePasswordResponseDto> change_password(
+  public HttpEntity<ChangePasswordResponseDto> changePassword(
       @Valid @RequestBody ChangePasswordRequestDto authRequestDto)
       throws SecurityCoreServerException {
     return new ResponseEntity<>(
