@@ -16,4 +16,8 @@ spring:
 values:
   security:
     hash: "elmonotiti"
+    expitarionToken: 3
 
+springdoc:
+  swagger-ui:
+    operationsSorter: method
