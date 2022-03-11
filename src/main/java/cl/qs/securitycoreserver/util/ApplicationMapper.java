@@ -2,7 +2,9 @@ package cl.qs.securitycoreserver.util;
 
 import cl.qs.securitycoreserver.dto.application.ApplicationRequestDto;
 import cl.qs.securitycoreserver.dto.application.ApplicationResponseDto;
+import cl.qs.securitycoreserver.dto.level.LevelRequestDto;
 import cl.qs.securitycoreserver.entity.Application;
+import cl.qs.securitycoreserver.entity.Level;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,6 +76,15 @@ public class ApplicationMapper {
         .phone(applicationRequestDto.getPhone())
         .contact(applicationRequestDto.getContact())
         .status(null)
+        .build();
+  }
+
+  public static Level build(LevelRequestDto levelRequestDto) {
+    return Level.builder()
+        .id(levelRequestDto.getId())
+        .name(levelRequestDto.getName())
+        .description(levelRequestDto.getDescription())
+        .createdFor(levelRequestDto.getUser())
         .build();
   }
 }
