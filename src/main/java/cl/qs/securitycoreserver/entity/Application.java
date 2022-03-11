@@ -2,18 +2,29 @@ package cl.qs.securitycoreserver.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.persistence.*;
-import javax.validation.Valid;
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Getter
@@ -45,7 +56,7 @@ public class Application implements Serializable {
     @Column(name = "currency_symbol")
     private String currencySymbol;
     @Column(name = "status")
-    private boolean status;
+    private Boolean status;
     @Column(name = "created_for")
     private Long createdFor;
     @CreationTimestamp
