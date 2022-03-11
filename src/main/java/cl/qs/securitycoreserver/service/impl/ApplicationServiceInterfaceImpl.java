@@ -8,6 +8,7 @@ import cl.qs.securitycoreserver.repository.ApplicationRepositoryInterface;
 import cl.qs.securitycoreserver.service.ApplicationServiceInterface;
 import cl.qs.securitycoreserver.util.ApplicationMapper;
 import cl.qs.securitycoreserver.util.Constants;
+import cl.qs.securitycoreserver.util.Matcher;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ApplicationServiceInterfaceImpl implements ApplicationServiceInterf
 
     Application applicationChatacter = ApplicationMapper.build(applicationRequestDto);
     List<Application> applicationEntities = applicationRepository.findAll(
-        Example.of(applicationChatacter));
+        Example.of(applicationChatacter, Matcher.getApplicationMatcher()));
 
     if (!CollectionUtils.isEmpty(applicationEntities)) {
       return ApplicationMapper.buildApplicationResponseList(applicationEntities);

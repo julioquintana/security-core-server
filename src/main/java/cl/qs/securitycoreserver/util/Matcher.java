@@ -12,4 +12,9 @@ public class Matcher {
         .withMatcher("name", contains().ignoreCase());
   }
 
+  public static ExampleMatcher getApplicationMatcher() {
+    return ExampleMatcher
+        .matchingAll()
+        .withMatcher("name", contains().ignoreCase());
+  }
 }
