@@ -2,11 +2,13 @@ package cl.qs.securitycoreserver.service.impl;
 
 import cl.qs.securitycoreserver.dto.user.UserRequestDto;
 import cl.qs.securitycoreserver.dto.user.UserResponseDto;
+import cl.qs.securitycoreserver.entity.Level;
 import cl.qs.securitycoreserver.entity.User;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
+import cl.qs.securitycoreserver.repository.LevelRepositoryInterface;
 import cl.qs.securitycoreserver.repository.UserRepositoryInterface;
 import cl.qs.securitycoreserver.security.PasswordUtil;
-import cl.qs.securitycoreserver.service.UserServiceInterface;
+import cl.qs.securitycoreserver.service.interfaces.UserServiceInterface;
 import cl.qs.securitycoreserver.util.Constants;
 import cl.qs.securitycoreserver.util.UserMapper;
 import java.util.Optional;
@@ -21,10 +23,13 @@ import org.springframework.util.CollectionUtils;
 public class UserServiceInterfaceImpl implements UserServiceInterface {
 
   private final UserRepositoryInterface userRepository;
+  private final LevelRepositoryInterface levelRepositoryInterface;
 
   @Autowired
-  public UserServiceInterfaceImpl(UserRepositoryInterface userRepository) {
+  public UserServiceInterfaceImpl(UserRepositoryInterface userRepository,
+      LevelServiceInterfaceImpl levelRepositoryInterface) {
     this.userRepository = userRepository;
+    this.levelRepositoryInterface = levelRepositoryInterface;
   }
 
   @Override
@@ -41,9 +46,23 @@ public class UserServiceInterfaceImpl implements UserServiceInterface {
   public UserResponseDto save(UserRequestDto userRequestDto) throws SecurityCoreServerException {
     Optional<User> optionalUser = userRepository.findByDni(userRequestDto.getDni());
     if (optionalUser.isEmpty()) {
-      userRequestDto.setPassword(PasswordUtil.getHashPassword(userRequestDto.getPassword()));
-      return UserMapper.buildUserResponse(
-          userRepository.save(UserMapper.buildUser(userRequestDto)));
+      Optional<Level> levelOptional = levelRepositoryInterface.findById(
+          userRequestDto.getLevelId());
+
+      if (levelOptional.isPresent()) {
+        var level = levelOptional.get();
+        userRequestDto.setPassword(PasswordUtil.getHashPassword(userRequestDto.getPassword()));
+
+        var user = UserMapper.buildUser(userRequestDto);
+
+        level.addUser(user);
+        levelRepositoryInterface.save(level);
+        return UserMapper.buildUserResponse(user);
+      }
+
+      throw new SecurityCoreServerException("9991",
+          Constants.ERROR, Constants.LEVEL_NOT_FOUND + " [" + userRequestDto.getLevelId() + "]",
+          HttpStatus.NOT_FOUND);
     } else {
       throw new SecurityCoreServerException("9991",
           Constants.ERROR, Constants.USER_FOUND + " [" + userRequestDto.getDni() + "]",

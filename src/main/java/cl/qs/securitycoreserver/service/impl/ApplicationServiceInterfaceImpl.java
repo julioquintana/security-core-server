@@ -5,7 +5,7 @@ import cl.qs.securitycoreserver.dto.application.ApplicationResponseDto;
 import cl.qs.securitycoreserver.entity.Application;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.ApplicationRepositoryInterface;
-import cl.qs.securitycoreserver.service.ApplicationServiceInterface;
+import cl.qs.securitycoreserver.service.interfaces.ApplicationServiceInterface;
 import cl.qs.securitycoreserver.util.ApplicationMapper;
 import cl.qs.securitycoreserver.util.Constants;
 import cl.qs.securitycoreserver.util.Matcher;

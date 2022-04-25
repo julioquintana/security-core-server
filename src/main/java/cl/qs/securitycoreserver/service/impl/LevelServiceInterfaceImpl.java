@@ -5,7 +5,7 @@ import cl.qs.securitycoreserver.dto.level.LevelResponseDto;
 import cl.qs.securitycoreserver.entity.Level;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.LevelRepositoryInterface;
-import cl.qs.securitycoreserver.service.LevelServiceInterface;
+import cl.qs.securitycoreserver.service.interfaces.LevelServiceInterface;
 import cl.qs.securitycoreserver.util.ApplicationMapper;
 import cl.qs.securitycoreserver.util.Constants;
 import cl.qs.securitycoreserver.util.LevelMapper;

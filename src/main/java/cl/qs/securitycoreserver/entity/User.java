@@ -91,4 +91,5 @@ public class User implements Serializable {
   @Fetch(value = FetchMode.SUBSELECT)
   private List<UserApplicationAccess> userApplicationAccesses;
 
+
 }

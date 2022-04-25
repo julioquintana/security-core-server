@@ -5,7 +5,7 @@ import cl.qs.securitycoreserver.dto.auth.AuthRequestDto;
 import cl.qs.securitycoreserver.dto.auth.AuthResponseDto;
 import cl.qs.securitycoreserver.dto.auth.ChangePasswordRequestDto;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
-import cl.qs.securitycoreserver.service.AuthServiceInterface;
+import cl.qs.securitycoreserver.service.interfaces.AuthServiceInterface;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

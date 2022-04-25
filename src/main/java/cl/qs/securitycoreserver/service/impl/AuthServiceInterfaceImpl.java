@@ -10,7 +10,7 @@ import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
 import cl.qs.securitycoreserver.repository.UserRepositoryInterface;
 import cl.qs.securitycoreserver.security.JWTCreator;
 import cl.qs.securitycoreserver.security.PasswordUtil;
-import cl.qs.securitycoreserver.service.AuthServiceInterface;
+import cl.qs.securitycoreserver.service.interfaces.AuthServiceInterface;
 import cl.qs.securitycoreserver.util.AuthMapper;
 import cl.qs.securitycoreserver.util.Constants;
 import cl.qs.securitycoreserver.util.UserMapper;

@@ -1,4 +1,4 @@
-package cl.qs.securitycoreserver.service;
+package cl.qs.securitycoreserver.service.interfaces;
 
 import cl.qs.securitycoreserver.dto.application.ApplicationRequestDto;
 import cl.qs.securitycoreserver.dto.application.ApplicationResponseDto;

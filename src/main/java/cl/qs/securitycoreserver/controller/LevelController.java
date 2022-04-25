@@ -3,7 +3,7 @@ package cl.qs.securitycoreserver.controller;
 import cl.qs.securitycoreserver.dto.level.LevelRequestDto;
 import cl.qs.securitycoreserver.dto.level.LevelResponseDto;
 import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
-import cl.qs.securitycoreserver.service.LevelServiceInterface;
+import cl.qs.securitycoreserver.service.interfaces.LevelServiceInterface;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
